@@ -32,16 +32,42 @@
  * @copyright	Copyright (c) 2014, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	http://codeigniter.com
- * @since	Version 1.0.0
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['terabyte_abbr'] = 'TB';
-$lang['gigabyte_abbr'] = 'GB';
-$lang['megabyte_abbr'] = 'MB';
-$lang['kilobyte_abbr'] = 'KB';
-$lang['bytes'] = 'Bytes';
+/**
+ * PDO ODBC Forge Class
+ *
+ * @category	Database
+ * @author		EllisLab Dev Team
+ * @link		http://codeigniter.com/database/
+ */
+class CI_DB_pdo_odbc_forge extends CI_DB_pdo_forge {
 
-/* End of file number_lang.php */
-/* Location: ./system/language/english/number_lang.php */
+	/**
+	 * UNSIGNED support
+	 *
+	 * @var	bool|array
+	 */
+	protected $_unsigned		= FALSE;
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Field attribute AUTO_INCREMENT
+	 *
+	 * @param	array	&$attributes
+	 * @param	array	&$field
+	 * @return	void
+	 */
+	protected function _attr_auto_increment(&$attributes, &$field)
+	{
+		// Not supported (in most databases at least)
+	}
+
+}
+
+/* End of file pdo_odbc_forge.php */
+/* Location: ./system/database/drivers/pdo/subdrivers/pdo_odbc_forge.php */

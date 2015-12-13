@@ -922,13 +922,11 @@ abstract class CI_DB_driver {
 			// Bind values' count must match the count of markers in the query
 			if ($bind_count !== $c)
 			{
-				$this->binds_error_report($sql, $binds, $bind_count);
 				return $sql;
 			}
 		}
 		elseif (($c = preg_match_all('/'.preg_quote($this->bind_marker, '/').'/i', $sql, $matches, PREG_OFFSET_CAPTURE)) !== $bind_count)
 		{
-			$this->binds_error_report($sql, $binds, $bind_count);
 			return $sql;
 		}
 
@@ -947,21 +945,6 @@ abstract class CI_DB_driver {
 		return $sql;
 	}
 
-	private function binds_error_report($sql, $binds, $bind_count)
-	{
-		$msg = 'SQL BIND Count Error #2: 3.0.0/database/DB_driver.php<br>-------<br>';
-		$msg .= $_SERVER['REQUEST_URI'].'<br>-------<br>';
-		$msg .= $sql.'<br>-------<br>';
-		$msg .= var_export($binds, true).'<br>-------<br>';
-		$msg .='$bind_count= '.$bind_count.'<br>-------<br>';
-		$msg .= '<xmp>'.print_r(debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT), true).'</xmp><br>-------<br>';
-		
-		$hey = get_instance();
-		
-		$hey->load->model('Actions_model');
-		$hey->Actions_model->notifyAdmins($msg, 'SQL binds_error_report');
-	}
-	
 	// --------------------------------------------------------------------
 
 	/**
@@ -981,7 +964,7 @@ abstract class CI_DB_driver {
 	 * Calculate the aggregate query elapsed time
 	 *
 	 * @param	int	The number of decimal places
-	 * @return	int
+	 * @return	string
 	 */
 	public function elapsed_time($decimals = 6)
 	{
@@ -1051,7 +1034,7 @@ abstract class CI_DB_driver {
 	/**
 	 * Escape String
 	 *
-	 * @param	string	$str
+	 * @param	string|string[]	$str
 	 * @param	bool	$like	Whether or not the string will be used in a LIKE condition
 	 * @return	string
 	 */
@@ -1120,7 +1103,7 @@ abstract class CI_DB_driver {
 	 * position is the primary key
 	 *
 	 * @param	string	the table name
-	 * @return	string
+	 * @return	mixed
 	 */
 	public function primary($table = '')
 	{
@@ -1163,7 +1146,7 @@ abstract class CI_DB_driver {
 	 * Returns an array of table names
 	 *
 	 * @param	string	$constrain_by_prefix = FALSE
-	 * @return	array
+	 * @return	mixed
 	 */
 	public function list_tables($constrain_by_prefix = FALSE)
 	{
@@ -1231,7 +1214,7 @@ abstract class CI_DB_driver {
 	 * Fetch Field Names
 	 *
 	 * @param	string	the table name
-	 * @return	array
+	 * @return	mixed
 	 */
 	public function list_fields($table = '')
 	{
@@ -1478,7 +1461,7 @@ abstract class CI_DB_driver {
 	 */
 	protected function _has_operator($str)
 	{
-		return (bool) preg_match('/(<|>|!|=|\sIS\s|\sEXISTS|\sBETWEEN|\sLIKE|\sIN\s*\(|\s)/i', trim($str));
+		return (bool) preg_match('/(<|>|!|=|\sIS NULL|\sIS NOT NULL|\sEXISTS|\sBETWEEN|\sLIKE|\sIN\s*\(|\s)/i', trim($str));
 	}
 
 	// --------------------------------------------------------------------
@@ -1502,7 +1485,8 @@ abstract class CI_DB_driver {
 				'\s*(?:<|>|!)?=\s*',		// =, <=, >=, !=
 				'\s*<>?\s*',			// <, <>
 				'\s*>\s*',			// >
-				'\s+IS(?:\sNOT)?(?:\sNULL)?',	// IS[ NOT] NULL
+				'\s+IS NULL',			// IS NULL
+				'\s+IS NOT NULL',		// IS NOT NULL
 				'\s+EXISTS\s*\([^\)]+\)',	// EXISTS(sql)
 				'\s+NOT EXISTS\s*\([^\)]+\)',	// NOT EXISTS(sql)
 				'\s+BETWEEN\s+\S+\s+AND\s+\S+',	// BETWEEN value AND value

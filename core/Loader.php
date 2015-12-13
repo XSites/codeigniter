@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -192,7 +192,7 @@ class CI_Loader {
 	 * @return	void
 	 */
 	public function library($library = '', $params = NULL, $object_name = NULL)
-	{	
+	{
 		if (is_array($library))
 		{
 			foreach ($library as $class)
@@ -899,7 +899,7 @@ class CI_Loader {
 		foreach (array(ucfirst($class), strtolower($class)) as $class)
 		{
 			$subclass = APPPATH.'libraries/'.$subdir.config_item('subclass_prefix').$class.'.php';
-			
+
 			// Is this a class extension request?
 			if (file_exists($subclass))
 			{

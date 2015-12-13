@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -33,7 +33,7 @@
  * @var string
  *
  */
-	define('CI_VERSION', '2.1.4');
+	define('CI_VERSION', '2.2.0');
 
 /**
  * CodeIgniter Branch (Core = TRUE, Reactor = FALSE)
@@ -318,7 +318,7 @@
  * ------------------------------------------------------
  *  Call the requested method
  * ------------------------------------------------------
- */ 
+ */
 	// Is there a "remap" function? If so, we call it instead
 	if (method_exists($CI, '_remap'))
 	{

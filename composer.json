@@ -1,0 +1,14 @@
+{
+    "name": "xsites/codeigniter",
+    "description": "Codeigniter framework for all projects",
+    "authors": [
+        {
+            "name": "Anton Pavlov",
+            "email": "anton@xsites.co.il"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    }
+}

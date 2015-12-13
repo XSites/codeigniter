@@ -136,6 +136,8 @@ class CI_DB_postgre_driver extends CI_DB {
 			}
 		}
 
+		$this->dsn .= "sslmode=disable ";
+		
 		$this->dsn = rtrim($this->dsn);
 	}
 

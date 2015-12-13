@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -54,7 +54,7 @@ class CI_Security {
 	 * @var string
 	 * @access protected
 	 */
-	protected $_csrf_token_name		= '';
+	protected $_csrf_token_name		= 'ci_csrf_token';
 	/**
 	 * Cookie name for Cross Site Request Forgery Protection Cookie
 	 *
